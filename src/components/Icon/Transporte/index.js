@@ -3,6 +3,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Transporte extends Component {
   render() {
-    return <Icon name="routes" size={100} color="#307125" />;
+    return <Icon name="car-traction-control" size={100} color="#307125" />;
   }
 }

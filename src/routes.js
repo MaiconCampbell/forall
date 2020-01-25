@@ -1,22 +1,24 @@
 // componentes que são usados para navegação entre screen
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-// importação dos componentes screens
-import PreLoad from './pages/Preload';
-import Login from './pages/Login';
-import CadUsuario from './pages/CadUsuario';
-import CadMotorista from './pages/CadMotorista';
-import RecSenha from './pages/RecSenha';
-// importação dos componentes de interações
-import Main from './pages/Main';
-import Localizacao from './pages/Localizacao';
-import Favoritos from './pages/Favoritos';
-import DadUsuario from './pages/DadUsuario';
-import MenuLocal from './pages/MenuLocal';
-import Transporte from './pages/Transporte';
-import CadLocal from './pages/CadLocal';
 
-console.disableYellowBox = true;
+// importação dos componentes screens
+import PreLoad from './screens/Preload';
+import Login from './screens/Login';
+import RecuperarSenha from './screens/RecuperarSenha';
+import Local from './screens/Local';
+import CadastroUsuario from './screens/CadastroUsuario';
+import Main from './screens/Main';
+import DadosUsuario from './screens/DadosUsuario';
+import Favoritos from './screens/Favoritos';
+import Cadastrolocal from './screens/CadastroLocal';
+import LocalizacaoMapa from './screens/LocalizacaoMapa';
+import Transporte from './screens/Transporte';
+
+// import CadMotorista from './pages/CadMotorista';
+// import MenuLocal from './pages/MenuLocal';
+
+// console.disableYellowBox = true;
 
 // criação da navegação por cabeçalho (Header)
 const Navegador = createStackNavigator(
@@ -33,36 +35,23 @@ const Navegador = createStackNavigator(
         header: null,
       },
     },
-    CadUsuario: {
-      screen: CadUsuario,
+    RecuperarSenha: {
+      screen: RecuperarSenha,
+      navigationOptions: {
+        title: 'Recuperar Senha',
+        headerStyle: {
+          backgroundColor: '#37752C',
+        },
+        headerTintColor: '#FFF',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      },
+    },
+    CadastroUsuario: {
+      screen: CadastroUsuario,
       navigationOptions: {
         title: 'Cadastro de novo usuário',
-        headerStyle: {
-          backgroundColor: '#37752C',
-        },
-        headerTintColor: '#FFF',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      },
-    },
-    CadMotorista: {
-      screen: CadMotorista,
-      navigationOptions: {
-        title: 'Cadastro de Motorista',
-        headerStyle: {
-          backgroundColor: '#37752C',
-        },
-        headerTintColor: '#FFF',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      },
-    },
-    RecSenha: {
-      screen: RecSenha,
-      navigationOptions: {
-        title: 'Recuperar a senha do Usuário',
         headerStyle: {
           backgroundColor: '#37752C',
         },
@@ -78,10 +67,10 @@ const Navegador = createStackNavigator(
         header: null,
       },
     },
-    Localizacao: {
-      screen: Localizacao,
+    LocalizacaoMapa: {
+      screen: LocalizacaoMapa,
       navigationOptions: {
-        title: 'Localização',
+        title: 'Locais com acessibilidade',
         headerStyle: {
           backgroundColor: '#37752C',
         },
@@ -91,10 +80,10 @@ const Navegador = createStackNavigator(
         },
       },
     },
-    MenuLocal: {
-      screen: MenuLocal,
+    Local: {
+      screen: Local,
       navigationOptions: {
-        title: 'Localização',
+        title: 'Local',
         headerStyle: {
           backgroundColor: '#37752C',
         },
@@ -117,8 +106,8 @@ const Navegador = createStackNavigator(
         },
       },
     },
-    DadUsuario: {
-      screen: DadUsuario,
+    DadosUsuario: {
+      screen: DadosUsuario,
       navigationOptions: {
         title: 'Dados do Usuário',
         headerStyle: {
@@ -130,8 +119,8 @@ const Navegador = createStackNavigator(
         },
       },
     },
-    CadLocal: {
-      screen: CadLocal,
+    Cadastrolocal: {
+      screen: Cadastrolocal,
       navigationOptions: {
         title: 'Cadastro do local',
         headerStyle: {
@@ -143,6 +132,46 @@ const Navegador = createStackNavigator(
         },
       },
     },
+
+    // CadMotorista: {
+    //   screen: CadMotorista,
+    //   navigationOptions: {
+    //     title: 'Cadastro de Motorista',
+    //     headerStyle: {
+    //       backgroundColor: '#37752C',
+    //     },
+    //     headerTintColor: '#FFF',
+    //     headerTitleStyle: {
+    //       fontWeight: 'bold',
+    //     },
+    //   },
+    // },
+    // MenuLocal: {
+    //   screen: MenuLocal,
+    //   navigationOptions: {
+    //     title: 'Localização',
+    //     headerStyle: {
+    //       backgroundColor: '#37752C',
+    //     },
+    //     headerTintColor: '#FFF',
+    //     headerTitleStyle: {
+    //       fontWeight: 'bold',
+    //     },
+    //   },
+    // },
+    // Favoritos: {
+    //   screen: Favoritos,
+    //   navigationOptions: {
+    //     title: 'Locais Favoritos',
+    //     headerStyle: {
+    //       backgroundColor: '#37752C',
+    //     },
+    //     headerTintColor: '#FFF',
+    //     headerTitleStyle: {
+    //       fontWeight: 'bold',
+    //     },
+    //   },
+    // },
     Transporte: {
       screen: Transporte,
       navigationOptions: {
