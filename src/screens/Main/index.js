@@ -75,7 +75,7 @@ export default class Main extends Component {
             <View style={styles.containerMenu}>
               <TouchableOpacity onPress={this.Localizacao} style={styles.btn}>
                 <Mapa />
-                <Text style={styles.txt}>Localização</Text>
+                <Text style={styles.txt}>Locais</Text>
               </TouchableOpacity>
             </View>
 
@@ -92,14 +92,14 @@ export default class Main extends Component {
             <View style={styles.containerMenu}>
               <TouchableOpacity onPress={this.DadosUsuario} style={styles.btn}>
                 <Usuario />
-                <Text style={styles.txt}>Dados pessoais</Text>
+                <Text style={styles.txt}>Perfil</Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.containerMenu}>
               <TouchableOpacity onPress={this.CadatroLocal} style={styles.btn}>
                 <CadLocal />
-                <Text style={styles.txt}>Adicionar Local</Text>
+                <Text style={styles.txt}>Cadastrar Local</Text>
               </TouchableOpacity>
             </View>
           </View>

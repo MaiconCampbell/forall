@@ -233,7 +233,7 @@ export default class CadastroUsuario extends Component {
             </Picker>
 
             <TextInput
-              placeholder="e-mail"
+              placeholder="E-mail"
               style={styles.input}
               placeholderTextColor="#999"
               keyboardType="email-address"
@@ -249,7 +249,7 @@ export default class CadastroUsuario extends Component {
             />
 
             <TextInput
-              placeholder="senha"
+              placeholder="Senha"
               style={styles.input}
               placeholderTextColor="#999"
               secureTextEntry={true}

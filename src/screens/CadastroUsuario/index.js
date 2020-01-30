@@ -107,7 +107,7 @@ export default class CadastroUsuario extends Component {
         this.props.navigation.navigate('Main');
       })
       .catch(() =>
-        Alert.alert('Erro ao inserir dados, entre em contato com o suporte')
+      this.setState({ loading: false, msg: '' }),
       );
   }
 
@@ -180,7 +180,6 @@ export default class CadastroUsuario extends Component {
               value={sobreNome}
               ref={sobreNome}
               returnKeyType="next"
-              onSubmitEditing={() => dataNascimento.current.focus()}
               onChangeText={sobreNome => {
                 this.setState({ sobreNome });
               }}
@@ -228,7 +227,7 @@ export default class CadastroUsuario extends Component {
             </Picker>
 
             <TextInput
-              placeholder="e-mail"
+              placeholder="E-mail"
               style={styles.input}
               placeholderTextColor="#999"
               keyboardType="email-address"
@@ -244,7 +243,7 @@ export default class CadastroUsuario extends Component {
             />
 
             <TextInput
-              placeholder="senha"
+              placeholder="Senha"
               style={styles.input}
               placeholderTextColor="#999"
               secureTextEntry={true}
@@ -265,8 +264,8 @@ export default class CadastroUsuario extends Component {
               value={confirmarSenha}
               ref={confirmarSenha}
               returnKeyType="send"
-              onChangeText={senha => {
-                this.setState({ senha });
+              onChangeText={cconfirmarSenha => {
+                this.setState({ confirmarSenha });
               }}
             />
 

@@ -58,12 +58,12 @@ export default class Login extends Component {
     if (email.current === null) {
       this.setState({
         loading: false,
-        msg: 'e-mail deve ser preenchido',
+        msg: 'E-mail deve ser preenchido',
       });
     } else if (senha.length === undefined) {
       this.setState({
         loading: false,
-        msg: 'senha deve ser preenchido',
+        msg: 'Senha deve ser preenchido',
       });
     } else {
       Keyboard.dismiss();
@@ -110,7 +110,7 @@ export default class Login extends Component {
 
     return (
       <View>
-        <Text>{msg}</Text>
+        <Text style={styles.msgErro}>{msg}</Text>
       </View>
     );
   }
@@ -145,7 +145,7 @@ export default class Login extends Component {
         <Image source={Logo} style={styles.logo} />
 
         <TextInput
-          placeholder="e-mail"
+          placeholder="E-mail"
           style={styles.input}
           placeholderTextColor="#999"
           keyboardType="email-address"
@@ -154,11 +154,12 @@ export default class Login extends Component {
           value={email}
           returnKeyType="next"
           onSubmitEditing={() => senha.current.focus()}
+          onTouchEnd={() => this.setState({ msg: '' })}
           onChangeText={value => this.AlterarCampo('email', value)}
         />
 
         <TextInput
-          placeholder="senha"
+          placeholder="Senha"
           style={styles.input}
           placeholderTextColor="#999"
           secureTextEntry={true}
@@ -166,6 +167,7 @@ export default class Login extends Component {
           ref={senha}
           returnKeyType="send"
           onSubmitEditing={() => this.entrar()}
+          onTouchEnd={() => this.setState({ msg: '' })}
           onChangeText={value => this.AlterarCampo('senha', value)}
         />
 
@@ -212,9 +214,9 @@ export default class Login extends Component {
 
         {/* txt link: Criar nova conta*/}
         <View style={styles.containerLink}>
-          <Text style={styles.TxtCriarConta}>Não tenho Conta: </Text>
+          <Text style={styles.TxtCriarConta}>Não tenho conta: </Text>
           <TouchableOpacity onPress={this.criarConta}>
-            <Text style={[styles.Txtlink]}>Criar nova conta</Text>
+            <Text style={[styles.Txtlink]}>Cadastre-se</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -293,5 +295,9 @@ const styles = StyleSheet.create({
   },
   TxtCriarConta: {
     fontSize: 20,
+  },
+  msgErro: {
+    fontSize: 20,
+    color: '#F00',
   },
 });

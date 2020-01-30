@@ -41,7 +41,10 @@ export default class RecuperarSenha extends Component {
         );
         this.setState({ email: '' });
       })
-      .catch(error => {});
+      .catch(error => {
+        Alert.alert('Erro', 'verifique o e-mail informado');
+        this.setState({ loading: false });
+      });
   }
 
   RenderizaBtn() {
@@ -74,10 +77,7 @@ export default class RecuperarSenha extends Component {
         </View>
 
         <View style={styles.containerForm}>
-          <Text style={styles.Txt}>Informe o e-mail e clique em no botão</Text>
-          <Text style={[styles.Txt, styles.TxtDestaque]}>
-            Redefinir a senha
-          </Text>
+          <Text style={styles.Txt}>Informe o e-mail</Text>
 
           <TextInput
             placeholder="Digite sem e-mail"
@@ -153,6 +153,8 @@ const styles = StyleSheet.create({
   },
   Txt: {
     fontSize: 20,
+    textAlign: 'center',
+    marginTop: 20,
   },
   TxtDestaque: {
     fontWeight: 'bold',

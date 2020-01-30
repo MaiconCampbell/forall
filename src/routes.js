@@ -14,9 +14,8 @@ import Favoritos from './screens/Favoritos';
 import Cadastrolocal from './screens/CadastroLocal';
 import LocalizacaoMapa from './screens/LocalizacaoMapa';
 import Transporte from './screens/Transporte';
-
-// import CadMotorista from './pages/CadMotorista';
-// import MenuLocal from './pages/MenuLocal';
+import CadastroTransporte from './screens/CadastroTransporte';
+import Avaliacao from './screens/AvaliacaoLocal';
 
 // console.disableYellowBox = true;
 
@@ -38,7 +37,7 @@ const Navegador = createStackNavigator(
     RecuperarSenha: {
       screen: RecuperarSenha,
       navigationOptions: {
-        title: 'Recuperar Senha',
+        title: 'Recuperar conta',
         headerStyle: {
           backgroundColor: '#37752C',
         },
@@ -51,7 +50,7 @@ const Navegador = createStackNavigator(
     CadastroUsuario: {
       screen: CadastroUsuario,
       navigationOptions: {
-        title: 'Cadastro de novo usuário',
+        title: 'Cadastro de usuário',
         headerStyle: {
           backgroundColor: '#37752C',
         },
@@ -70,7 +69,7 @@ const Navegador = createStackNavigator(
     LocalizacaoMapa: {
       screen: LocalizacaoMapa,
       navigationOptions: {
-        title: 'Locais com acessibilidade',
+        title: 'Tela do Local',
         headerStyle: {
           backgroundColor: '#37752C',
         },
@@ -109,7 +108,7 @@ const Navegador = createStackNavigator(
     DadosUsuario: {
       screen: DadosUsuario,
       navigationOptions: {
-        title: 'Dados do Usuário',
+        title: 'Editar perfil',
         headerStyle: {
           backgroundColor: '#37752C',
         },
@@ -132,50 +131,36 @@ const Navegador = createStackNavigator(
         },
       },
     },
-
-    // CadMotorista: {
-    //   screen: CadMotorista,
-    //   navigationOptions: {
-    //     title: 'Cadastro de Motorista',
-    //     headerStyle: {
-    //       backgroundColor: '#37752C',
-    //     },
-    //     headerTintColor: '#FFF',
-    //     headerTitleStyle: {
-    //       fontWeight: 'bold',
-    //     },
-    //   },
-    // },
-    // MenuLocal: {
-    //   screen: MenuLocal,
-    //   navigationOptions: {
-    //     title: 'Localização',
-    //     headerStyle: {
-    //       backgroundColor: '#37752C',
-    //     },
-    //     headerTintColor: '#FFF',
-    //     headerTitleStyle: {
-    //       fontWeight: 'bold',
-    //     },
-    //   },
-    // },
-    // Favoritos: {
-    //   screen: Favoritos,
-    //   navigationOptions: {
-    //     title: 'Locais Favoritos',
-    //     headerStyle: {
-    //       backgroundColor: '#37752C',
-    //     },
-    //     headerTintColor: '#FFF',
-    //     headerTitleStyle: {
-    //       fontWeight: 'bold',
-    //     },
-    //   },
-    // },
+    CadastroTransporte: {
+      screen: CadastroTransporte,
+      navigationOptions: {
+        title: 'Cadastro de motorista',
+        headerStyle: {
+          backgroundColor: '#37752C',
+        },
+        headerTintColor: '#FFF',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      },
+    },
     Transporte: {
       screen: Transporte,
       navigationOptions: {
         title: 'Transporte',
+        headerStyle: {
+          backgroundColor: '#37752C',
+        },
+        headerTintColor: '#FFF',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      },
+    },
+    Avaliacao: {
+      screen: Avaliacao,
+      navigationOptions: {
+        title: 'Avaliação Local',
         headerStyle: {
           backgroundColor: '#37752C',
         },

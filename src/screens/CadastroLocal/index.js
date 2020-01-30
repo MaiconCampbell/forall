@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import ImagePicker from 'react-native-image-picker';
+import axios from 'axios';
+
 import {
   View,
   Text,
@@ -12,8 +14,8 @@ import {
   ScrollView,
   Picker,
   Dimensions,
+  Alert,
 } from 'react-native';
-import DatePicker from 'react-native-datepicker';
 
 import MapView from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
@@ -52,17 +54,18 @@ export default class Cadastrolocal extends Component {
       categoria: '',
       telReserva: '',
       endereco: '',
-      horaInicio: '18:00:00',
+      horaInicio: '',
       horaFim: '',
       preview: null,
       image: null,
       telaMapa: false,
-      latitude: -9.9668994,
-      longitude: -67.8450558,
+      latitude: null,
+      longitude: null,
       coords: false,
       urlImg: '',
       latitudeInit: '',
       longitudeInit: '',
+      comentarios: '',
     };
 
     request_location_runtime_permission();
@@ -154,6 +157,31 @@ export default class Cadastrolocal extends Component {
     );
   };
 
+  converteLatLong() {
+    this.setState({ telaMapa: false, coords: true });
+
+    if (this.state.latitude !== null) {
+      const { latitude, longitude } = this.state;
+      // requisição HTTP
+      // get - recupera o retorno da requisição http
+      axios
+        .get(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},
+          ${longitude}&key=AIzaSyD3TstYfn9h6JFtXZv3zLDr9YRjUKkSEuQ`
+        )
+        .then(res => {
+          console.log(res);
+          var dado = res.data.results[2].formatted_address;
+          console.log('Dado retorno: ', dado);
+          // atribui o retorno a atributo de estado
+          this.setState({ endereco: dado });
+        })
+        .catch(() => {
+          console.log('Erro na requisição dos dados.');
+        });
+    }
+  }
+
   cadastrar() {
     const {
       preview,
@@ -163,10 +191,13 @@ export default class Cadastrolocal extends Component {
       endereco,
       horaInicio,
       horaFim,
+      comentarios,
       latitude,
       longitude,
       urlImg,
     } = this.state;
+
+    const { currentUser } = firebase.auth();
 
     const locaisRef = firebase
       .database()
@@ -181,8 +212,9 @@ export default class Cadastrolocal extends Component {
         horaFim: horaFim,
         latitude: latitude,
         longitude: longitude,
+        comentarios: comentarios
       })
-      .then(item => {
+      .then( () => {
         alert('Dados adicionado com sucesso!');
         this.props.navigation.dispatch(
           StackActions.reset({
@@ -207,6 +239,7 @@ export default class Cadastrolocal extends Component {
       horaFim,
       preview,
       image,
+      comentarios,
       latitude,
       longitude,
       latitudeInit,
@@ -232,7 +265,9 @@ export default class Cadastrolocal extends Component {
                   <Icon name="upload" style={styles.icones} />
                   <Text style={styles.selectButtonText}>Carregar Imagem</Text>
                 </TouchableOpacity>
+
                 {preview && <Image style={styles.preview} source={preview} />}
+
                 <TouchableOpacity
                   onPress={() => {
                     this.setState({ telaMapa: true });
@@ -244,11 +279,12 @@ export default class Cadastrolocal extends Component {
                 </TouchableOpacity>
                 {coords && (
                   <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.textCoords}>
+                    {/* <Text style={styles.textCoords}>
                       Latitude:{latitude} Longitude:{longitude}
-                    </Text>
+                    </Text> */}
                   </View>
                 )}
+
                 <TextInput
                   placeholder="Nome fantasia"
                   style={styles.input}
@@ -264,7 +300,7 @@ export default class Cadastrolocal extends Component {
                     this.setState({ nomeFantasia });
                   }}
                 />
-                <Text>Categoria:</Text>
+                <Text style={styles.dados}>Categoria:</Text>
                 <Picker
                   selectedValue={categoria}
                   style={styles.input}
@@ -321,7 +357,7 @@ export default class Cadastrolocal extends Component {
                   placeholder="Hora de Abertura"
                   style={styles.input}
                   placeholderTextColor="#999"
-                  keyboardType="numeric"
+                  keyboardType="default"
                   autoCorrect={false}
                   autoCapitalize="words"
                   value={horaInicio}
@@ -332,12 +368,12 @@ export default class Cadastrolocal extends Component {
                     this.setState({ horaInicio });
                   }}
                 />
-                
+
                 <TextInput
                   placeholder="Hora de Fechamento"
                   style={styles.input}
                   placeholderTextColor="#999"
-                  keyboardType="numeric"
+                  keyboardType="default"
                   autoCorrect={false}
                   autoCapitalize="words"
                   value={horaFim}
@@ -348,6 +384,23 @@ export default class Cadastrolocal extends Component {
                     this.setState({ horaFim });
                   }}
                 />
+
+                <TextInput
+                  placeholder="Dados de acessibilidade"
+                  style={styles.input}
+                  placeholderTextColor="#999"
+                  keyboardType="default"
+                  autoCorrect={false}
+                  autoCapitalize="words"
+                  value={comentarios}
+                  ref={comentarios}
+                  multiline
+                  numberOfLines={5}
+                  onChangeText={comentarios => {
+                    this.setState({ comentarios });
+                  }}
+                />
+
                 <TouchableOpacity style={styles.btn} onPress={this.cadastrar}>
                   <Text style={styles.txtBtn}>Salvar novo Local</Text>
                 </TouchableOpacity>
@@ -386,7 +439,7 @@ export default class Cadastrolocal extends Component {
             <TouchableOpacity
               style={styles.btn2}
               onPress={() => {
-                this.setState({ telaMapa: false, coords: true });
+                this.converteLatLong();
               }}
             >
               <Text style={styles.txtBtn}>Selecionar</Text>
@@ -492,6 +545,11 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: '#FFF',
     fontWeight: 'normal',
+    alignSelf: 'center',
+  },
+  dados: {
+    fontFamily: 'Roboto',
+    fontSize: 20,
     alignSelf: 'center',
   },
   icones: {

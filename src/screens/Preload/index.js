@@ -16,7 +16,6 @@ export default class Preload extends Component {
   // metodo assionado toda vez que o componente é renderizado
   constructor(props) {
     super(props);
-    this.state = {};
 
     /**
      * Verifica se existe um usuário logado =>
